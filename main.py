@@ -6,7 +6,10 @@ app = FastAPI()
 
 @app.get("/api/is_shopify_shop/")
 async def is_shopify_shop(shop_url: str):
-    r = requests.get(shop_url)
+    try:
+        r = requests.get(shop_url)
+    except:
+        return False
     return 'cdn.shopify.com' in r.text
          
 if __name__ == "__main__":
